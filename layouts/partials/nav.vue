@@ -30,8 +30,20 @@ export default {
   }
 
   header .container {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Extra small devices (portrait phones, less than 576px) */
+  @media (min-width: 576px) {
+
+    header .container {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
   }
 
   header .logo, nav li a {
