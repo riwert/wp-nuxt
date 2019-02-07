@@ -16,7 +16,7 @@
 export default {
   head() {
     return {
-      title: 'Post Nuxt App',
+      title: `${this.post.title} | Post Nuxt App`,
       meta: [
         { hid: 'description', name: 'description', content: 'This is my post description here.'},
         { hid: 'keywords', name: 'keywords', content: 'post, nuxt, app'},
