@@ -1,8 +1,19 @@
 <template>
   <div>
+    <Nav />
     <nuxt />
   </div>
 </template>
+
+<script>
+import Nav from './partials/nav';
+
+export default {
+  components: {
+    Nav
+  }
+}
+</script>
 
 <style>
 html {
@@ -26,11 +37,12 @@ html {
 
 .button--green {
   display: inline-block;
-  border-radius: 4px;
+  padding: 0.85rem 1.85rem;
+  margin: 1rem 0;
   border: 1px solid #3b8070;
-  color: #3b8070;
+  border-radius: 0.25rem;
   text-decoration: none;
-  padding: 10px 30px;
+  color: #3b8070;
 }
 
 .button--green:hover {
@@ -40,19 +52,19 @@ html {
 
 .button--grey {
   display: inline-block;
-  border-radius: 4px;
+  padding: 0.85rem 1.85rem;
+  margin: 1rem 0;
   border: 1px solid #35495e;
+  border-radius: 0.25rem;
   color: #35495e;
   text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
 }
 
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
 }
-
+/*
 .container {
   display: flex;
   flex-direction: column;
@@ -61,5 +73,5 @@ html {
   min-height: 100vh;
   width: 50rem;
   margin: 0 auto;
-}
+} */
 </style>

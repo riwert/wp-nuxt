@@ -1,60 +1,31 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
+  <section>
+    <div class="container">
       <h1 class="title">
-        nuxt-test
+        Nuxt App
       </h1>
       <h2 class="subtitle">
         My grand Nuxt.js project
       </h2>
-      <div class="links">
-        <nuxt-link v-bind:to="'/about'" class="button--grey">About</nuxt-link>
-        <nuxt-link v-bind:to="'/blog'" class="button--green">Blog</nuxt-link>
-      </div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, dignissimos rerum. Voluptas molestiae voluptatibus in! Ex non rem perspiciatis repellendus optio quis illum porro officia id? Culpa impedit accusamus id?</p>
     </div>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  head() {
+    return {
+      title: 'Nuxt App',
+      meta: [
+        { hid: 'description', name: 'description', content: 'This is my Nuxt App here.'},
+        { hid: 'keywords', name: 'keywords', content: 'home, nuxt, app'},
+      ]
+    }
   }
 }
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
