@@ -10,7 +10,6 @@
 
 <script>
 export default {
-  transition: 'pulse',
   head() {
     return {
       title: 'Services Nuxt App',
