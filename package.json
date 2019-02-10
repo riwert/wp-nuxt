@@ -1,7 +1,7 @@
 {
-  "name": "nuxt-test",
+  "name": "nuxt-wp",
   "version": "1.0.0",
-  "description": "My grand Nuxt.js project",
+  "description": "Nuxt with WP REST API",
   "author": "Revert",
   "private": true,
   "scripts": {
@@ -18,6 +18,9 @@
     "nuxt": "^2.3.4"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
-  }
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0"
+  },
+  "proxy": "http://localhost/wp-rest-api"
 }
