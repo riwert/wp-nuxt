@@ -12,6 +12,11 @@
           <li><nuxt-link to="/blog">Blog</nuxt-link></li>
           <li><nuxt-link to="/books">Books</nuxt-link></li>
           <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+          <li v-for="page in pages" :key="page.id">
+            <nuxt-link :to="page.slug">
+              {{ page.title.rendered }}
+            </nuxt-link>
+          </li>
         </ul>
       </nav>
     </div>
@@ -20,7 +25,7 @@
 
 <script>
 export default {
-
+  props: ['pages']
 }
 </script>
 

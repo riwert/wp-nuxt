@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav :pages="pages" />
     <Nuxt />
     <Footer />
   </div>
@@ -13,6 +13,11 @@ import Footer from './partials/footer';
 export default {
   components: {
     Nav, Footer
+  },
+  computed: {
+    pages () {
+      return this.$store.state.pages
+    }
   }
 }
 </script>
