@@ -13,10 +13,15 @@
           <li><nuxt-link to="/books">Books</nuxt-link></li>
           <li><nuxt-link to="/contact">Contact</nuxt-link></li>
           <li v-for="page in pages" :key="page.id">
-            <nuxt-link :to="page.slug">
+            <nuxt-link :to="`/${page.slug}`">
               {{ page.title.rendered }}
             </nuxt-link>
           </li>
+          <!-- <li v-for="page in pages.items" :key="page.id">
+            <nuxt-link :to="page.url">
+              {{ page.title }}
+            </nuxt-link>
+          </li> -->
         </ul>
       </nav>
     </div>

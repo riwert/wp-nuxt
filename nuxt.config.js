@@ -1,8 +1,12 @@
 const pkg = require('./package')
-
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
+
+  env: {
+    apiUrl: process.env.API_URL || 'http://localhost/wp-rest-api/wp-json/wp/v2'
+  },
 
   /*
   ** Headers of the page
@@ -47,6 +51,7 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
 
   /*
@@ -60,6 +65,23 @@ module.exports = {
     */
     extend(config, ctx) {
 
+    }
+  },
+
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'posts',
+        path: '/posts/*',
+        component: resolve(__dirname, 'pages/extended/post.vue')
+      })
+    },
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'custom',
+        path: '*',
+        component: resolve(__dirname, 'pages/extended/index.vue')
+      })
     }
   }
 }

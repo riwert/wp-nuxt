@@ -7,12 +7,15 @@
         <h5>{{ book.acf.writer }}</h5>
         <div class="intro">
           <nuxt-link class="image" :to="`/books/${book.id}`">
-            <img :src="book.media.media_details.sizes.full.source_url" :alt="book.title.rendered" />
+            <img :src="book._embedded['wp:featuredmedia'][0].source_url" :alt="book._embedded['wp:featuredmedia'][0].alt_text" />
           </nuxt-link>
           <div class="short-description">
             <div class="excerpt" v-html="book.excerpt.rendered"></div>
             <nuxt-link class="more button--green" :to="`/books/${book.id}`">Read more &raquo;</nuxt-link>
           </div>
+        </div>
+        <div class="caption">
+          <p><small>Created {{ book.date }} by <strong>{{ book._embedded.author[0].name }}</strong></small></p>
         </div>
       </div>
     </div>
@@ -31,16 +34,7 @@ export default {
     }
   },
   async asyncData({ $axios }) {
-    const url = 'http://localhost/wp-rest-api/wp-json/wp/v2';
-    const books = await $axios.$get(`${url}/books`); // ?_embed
-
-    for (let i = 0, len = books.length; i < len; i++) {
-      let book = books[i];
-      let media = await $axios.$get(`${url}/media/${book.featured_media}`);
-      let user = await $axios.$get(`${url}/users/${book.author}`);
-      book.media = media;
-      book.user = user;
-    }
+    const books = await $axios.$get(`${process.env.apiUrl}/books?_embed`);
 
     return {
       books: books

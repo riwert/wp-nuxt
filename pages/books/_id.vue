@@ -4,7 +4,7 @@
       <h1>{{ book.title.rendered }}</h1>
       <div class="explication">
         <div class="image">
-          <img :src="book.media.media_details.sizes.full.source_url" :alt="book.title.rendered" />
+          <img :src="book._embedded['wp:featuredmedia'][0].source_url" :alt="book._embedded['wp:featuredmedia'][0].alt_text" />
         </div>
         <div class="description">
           <div class="details">
@@ -13,7 +13,7 @@
           </div>
           <div class="content" v-html="book.content.rendered"></div>
           <div class="caption">
-            <p><small>Created {{ book.date }} by <strong>{{ book.user.name }}</strong></small></p>
+            <p><small>Created {{ book.date }} by <strong>{{ book._embedded.author[0].name }}</strong></small></p>
           </div>
         </div>
       </div>
@@ -36,12 +36,7 @@ export default {
     }
   },
   async asyncData({ params, $axios }) {
-    const url = 'http://localhost/wp-rest-api/wp-json/wp/v2';
-    const book = await $axios.$get(`${url}/books/${params.id}`);
-    const media = await $axios.$get(`${url}/media/${book.featured_media}`);
-    const user = await $axios.$get(`${url}/users/${book.author}`);
-    book.media = media;
-    book.user = user;
+    const book = await $axios.$get(`${process.env.apiUrl}/books/${params.id}?_embed`);
 
     return {
       book: book

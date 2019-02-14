@@ -5,7 +5,7 @@
       <p>This is a blog page.</p>
       <ul class="posts">
         <li v-for="post in posts" :key="post.id">
-          <nuxt-link v-bind:to="'/blog/' + post.id">{{ post.title }}</nuxt-link>
+          <nuxt-link v-bind:to="'/blog/' + post.slug">{{ post.title.rendered }}</nuxt-link>
         </li>
       </ul>
       <nuxt-link v-bind:to="'/'" class="button--grey">Back</nuxt-link>
@@ -25,8 +25,11 @@ export default {
     }
   },
   async asyncData({ $axios }) {
-    const posts = await $axios.$get(`https://jsonplaceholder.typicode.com/posts`);
-    return { posts: posts }
+    const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed`);
+
+    return {
+      posts: posts
+    }
   }
 }
 </script>

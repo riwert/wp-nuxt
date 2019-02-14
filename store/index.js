@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const url = 'http://localhost/wp-rest-api/wp-json/wp/v2';
-
 export const state = () => ({
 	pages: null
 })
@@ -18,7 +16,8 @@ export const actions = {
   // },
   async nuxtServerInit ({ commit }, { req }) {
     // console.log('server init')
-    let { data } = await axios.get(`${url}/pages`)
+    let { data } = await axios.get(`${process.env.apiUrl}/pages?&orderby=menu_order&order=asc`)
+    // let { data } = await axios.get(`${process.env.apiUrl}/menus/menu-1`)
     commit('SET_PAGES', data)
   }
 }
