@@ -4,7 +4,7 @@
       <h1>{{ post.title.rendered }}</h1>
       <div class="content" v-html="post.content.rendered"></div>
       <div class="controls">
-        <nuxt-link v-bind:to="'/blog'" class="button--grey">Back</nuxt-link>
+        <nuxt-link v-bind:to="'/blog'" class="button">Back</nuxt-link>
       </div>
     </div>
   </section>

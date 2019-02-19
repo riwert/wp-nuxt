@@ -11,7 +11,7 @@
           </nuxt-link>
           <div class="short-description">
             <div class="excerpt" v-html="book.excerpt.rendered"></div>
-            <nuxt-link class="more button--green" :to="`/books/${book.id}`">Read more &raquo;</nuxt-link>
+            <nuxt-link class="more button" :to="`/books/${book.id}`">Read more &raquo;</nuxt-link>
           </div>
         </div>
         <div class="caption">

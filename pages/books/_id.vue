@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="controls">
-        <nuxt-link :to="'/books'" class="back button--grey">Back</nuxt-link>
+        <nuxt-link :to="'/books'" class="back button">Back</nuxt-link>
       </div>
     </div>
   </section>

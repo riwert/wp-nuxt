@@ -4,7 +4,7 @@
       <logo />
       <h1>About</h1>
       <p>This is an about page.</p>
-      <nuxt-link v-bind:to="'/'" class="button--grey">Back</nuxt-link>
+      <nuxt-link v-bind:to="'/'" class="button">Back</nuxt-link>
     </div>
   </section>
 </template>

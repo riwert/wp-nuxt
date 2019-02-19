@@ -9,17 +9,12 @@
 
 <script>
 export default {
-  head() {
-    return {
-      title: `${this.title}`
-    }
-  },
   async asyncData({ params, $axios }) {
-    const page = await $axios.$get(`${process.env.apiUrl}/pages?slug=${params.pathMatch}`);
+    const post = await $axios.$get(`${process.env.apiUrl}/posts?slug=${params.slug}`);
     return {
-      slug: page[0].slug,
-      title: page[0].title.rendered,
-      content: page[0].content.rendered
+      slug: post[0].slug,
+      title: post[0].title.rendered,
+      content: post[0].content.rendered
     }
   },
 }

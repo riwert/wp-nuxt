@@ -1,8 +1,6 @@
 <template>
-  <footer>
-    <div class="container">
-      Copyright &copy; 2019
-    </div>
+  <footer id="footer">
+    <p class="copyright">&copy; Nuxt.js and WP REST API. All rights reserved. Made by Revert: <a class="blank" href="http://revert.pl" title="Web Developer">Revert</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
   </footer>
 </template>
 
@@ -13,8 +11,5 @@ export default {
 </script>
 
 <style scoped>
-  .container {
-    color: rgba(0, 0, 0, 0.75);
-    text-align: center;
-  }
+
 </style>

@@ -4,11 +4,11 @@
       <h1>Blog</h1>
       <p>This is a blog page.</p>
       <ul class="posts">
-        <li v-for="post in posts" :key="post.id">
+        <article v-for="post in posts" :key="post.id">
           <nuxt-link v-bind:to="'/blog/' + post.slug">{{ post.title.rendered }}</nuxt-link>
-        </li>
+        </article>
       </ul>
-      <nuxt-link v-bind:to="'/'" class="button--grey">Back</nuxt-link>
+      <nuxt-link v-bind:to="'/'" class="button">Back</nuxt-link>
     </div>
   </section>
 </template>
@@ -35,7 +35,5 @@ export default {
 </script>
 
 <style>
-.posts {
-  text-align: left;
-}
+
 </style>

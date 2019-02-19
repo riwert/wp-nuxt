@@ -1,0 +1,184 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  position: relative;
+  width: auto;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* Extra thin devices (landscape phones, 480px height) */
+@media (min-height: 480px) {
+
+  html {
+      font-size: 12px;
+  }
+
+  .container {
+    width: auto;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (min-width: 576px) {
+
+  html {
+      font-size: 13px;
+  }
+
+  .container {
+    width: 540px;
+  }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 768px) {
+
+  html {
+      font-size: 14px;
+  }
+
+  .container {
+    width: 720px;
+  }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (min-width: 992px) {
+
+  html {
+      font-size: 15px;
+  }
+
+  .container {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1199.98px) {
+
+  html {
+      font-size: 16px;
+  }
+
+  .container {
+    width: 1140px;
+  }
+}
+
+section {
+  padding: 3rem 0;
+}
+
+h1 {
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(179, 179, 179);
+}
+
+.page-enter-active, .page-leave-active {
+  animation: custom-bounce-in .5s;
+}
+
+.page-enter, .page-leave-to {
+  animation: custom-bounce-in .5s reverse;
+}
+
+.custom-bounce-enter-active {
+  animation: custom-bounce-in .5s;
+}
+
+.custom-bounce-leave-active {
+  animation: custom-bounce-in .5s reverse;
+}
+
+@keyframes custom-bounce-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.opacity-enter-active {
+  animation: opacity .5s;
+}
+
+.opacity-leave-active {
+  animation: opacity .5s reverse;
+}
+
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.flash-enter-active {
+  animation: flash .5s;
+}
+
+.flash-leave-active {
+  animation: flash .5s reverse;
+}
+
+.pulse-enter-active {
+  animation: pulse .5s;
+}
+
+.pulse-leave-active {
+  animation: pulse .5s reverse;
+}
+
+.tada-enter-active {
+  animation: tada .5s;
+}
+
+.tada-leave-active {
+  animation: tada .5s reverse;
+}
+
+.rubber-band-enter-active {
+  animation: rubberBand .5s;
+}
+
+.rubber-band-leave-active {
+  animation: rubberBand .5s reverse;
+}
+
+.flip-in-x-enter-active {
+  animation: flipInX .5s;
+}
+
+.flip-in-x-leave-active {
+  animation: flipInX .5s reverse;
+}

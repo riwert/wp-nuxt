@@ -4,9 +4,9 @@
       <h1>Post {{ post.title }}</h1>
       <p>{{ post.body }}</p>
       <div class="controls">
-        <nuxt-link v-if="prevPost" v-bind:to="`/blog/${prevPost.id}`" class="button--green">Previous</nuxt-link>
-        <nuxt-link v-bind:to="'/blog'" class="button--grey">Back</nuxt-link>
-        <nuxt-link v-if="nextPost" v-bind:to="`/blog/${nextPost.id}`" class="button--green">Next</nuxt-link>
+        <nuxt-link v-if="prevPost" v-bind:to="`/blog/${prevPost.id}`" class="button">Previous</nuxt-link>
+        <nuxt-link v-bind:to="'/blog'" class="button">Back</nuxt-link>
+        <nuxt-link v-if="nextPost" v-bind:to="`/blog/${nextPost.id}`" class="button">Next</nuxt-link>
       </div>
     </div>
   </section>

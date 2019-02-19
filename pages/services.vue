@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Services</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem minima corrupti animi sequi eius voluptatem eos ab et molestiae iste architecto nostrum necessitatibus, consectetur repudiandae reiciendis nobis accusantium dolor. Reprehenderit?</p>
-      <nuxt-link v-bind:to="'/'" class="button--grey">Back</nuxt-link>
+      <nuxt-link v-bind:to="'/'" class="button">Back</nuxt-link>
     </div>
   </section>
 </template>
