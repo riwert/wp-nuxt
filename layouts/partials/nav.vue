@@ -60,8 +60,10 @@
 
 <script>
 export default {
-  props: ['pages'],
   computed: {
+    pages() {
+      return this.$store.state.pages
+    },
     computedPages: function() {
       let rootPages = [];
       let subPages = [];

@@ -1,12 +1,24 @@
 import axios from 'axios'
 
 export const state = () => ({
-	pages: null
+  config: null,
+  pages: null,
+  posts: null
 })
 
 export const mutations = {
+  SET_CONFIG(state, config) {
+    const configObj = {};
+    config.forEach((conf) => {
+      configObj[conf.slug] = conf;
+    });
+		state.config = configObj
+  },
 	SET_PAGES(state, pages) {
 		state.pages = pages
+  },
+  SET_POSTS(state, posts) {
+		state.posts = posts
 	}
 }
 
@@ -16,8 +28,13 @@ export const actions = {
   // },
   async nuxtServerInit ({ commit }, { req }) {
     // console.log('server init')
-    let { data } = await axios.get(`${process.env.apiUrl}/pages?&orderby=menu_order&order=asc`)
-    // let { data } = await axios.get(`${process.env.apiUrl}/menus/v1/menus/menu-1`)
-    commit('SET_PAGES', data)
+    let siteConfig = await axios.get(`${process.env.apiUrl}/config`);
+    commit('SET_CONFIG', siteConfig.data);
+
+    let menuPages = await axios.get(`${process.env.apiUrl}/pages?orderby=menu_order&order=asc`);
+    commit('SET_PAGES', menuPages.data);
+
+    let sidePosts = await axios.get(`${process.env.apiUrl}/posts?categories=4&per_page=3&_embed`);
+    commit('SET_POSTS', sidePosts.data);
   }
 }
