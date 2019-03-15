@@ -1,7 +1,7 @@
 <template>
   <footer id="footer">
     <p class="copyright">&copy; {{ footer.text }}
-      Made by <a class="blank" href="http://revert.pl" title="Web Developer">Revert</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+      Made by <a class="blank" href="http://revert.pl" title="Web Developer">Revert</a>. Design: <a class="blank" href="https://html5up.net">HTML5 UP</a>.</p>
   </footer>
 </template>
 

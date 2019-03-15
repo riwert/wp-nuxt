@@ -1,27 +1,51 @@
 <template>
-  <section>
-    <div class="container">
-      <h1 class="title">
-        Nuxt App
-      </h1>
-      <h2 class="subtitle">
-        My grand Nuxt.js project
-      </h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, dignissimos rerum. Voluptas molestiae voluptatibus in! Ex non rem perspiciatis repellendus optio quis illum porro officia id? Culpa impedit accusamus id?</p>
-    </div>
-  </section>
+  <div>
+
+    <MainIntro :raw-page="page" />
+
+    <MainFeatures :raw-page="page" />
+
+    <MainPosts :raw-page="page" :raw-posts="posts" />
+
+  </div>
 </template>
 
 <script>
+import MainIntro from '~/components/MainIntro';
+import MainFeatures from '~/components/MainFeatures';
+import MainPosts from '~/components/MainPosts';
+
 export default {
-  transition: 'pulse',
+  components: {
+    MainIntro,
+    MainFeatures,
+    MainPosts
+  },
   head() {
     return {
-      title: 'Nuxt App',
-      meta: [
-        { hid: 'description', name: 'description', content: 'This is my Nuxt App here.'},
-        { hid: 'keywords', name: 'keywords', content: 'home, nuxt, app'},
-      ]
+      title: this.title
+    }
+  },
+  async asyncData({ params, $axios, payload, store }) {
+    let slug = 'strona-glowna';
+    let categoryId = 3;
+    let categoryLimit = 6;
+    if (payload) {
+      return {
+        page: payload,
+        slug: payload.slug,
+        title: payload.title.rendered,
+        content: payload.content.rendered
+      }
+    } else {
+      const pages = await $axios.$get(`${process.env.apiUrl}/pages?slug=${slug}&_embed`);
+      store.commit('SET_CURRENT_PAGE', pages[0]);
+      const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&categories=${categoryId}&per_page=${categoryLimit}`);
+      return {
+        title: pages[0].title.rendered,
+        page: pages[0],
+        posts: posts
+      }
     }
   }
 }

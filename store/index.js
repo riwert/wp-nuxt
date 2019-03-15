@@ -1,9 +1,12 @@
 import axios from 'axios'
 
+export const strict = false
+
 export const state = () => ({
   config: null,
   pages: null,
-  posts: null
+  posts: null,
+  currentPage: null,
 })
 
 export const mutations = {
@@ -19,7 +22,10 @@ export const mutations = {
   },
   SET_POSTS(state, posts) {
 		state.posts = posts
-	}
+  },
+  SET_CURRENT_PAGE(state, currentPage) {
+		state.currentPage = currentPage
+  },
 }
 
 export const actions = {
@@ -28,13 +34,13 @@ export const actions = {
   // },
   async nuxtServerInit ({ commit }, { req }) {
     // console.log('server init')
-    let siteConfig = await axios.get(`${process.env.apiUrl}/config`);
-    commit('SET_CONFIG', siteConfig.data);
+    let siteConfig = await axios.get(`${process.env.apiUrl}/config`)
+    commit('SET_CONFIG', siteConfig.data)
 
-    let menuPages = await axios.get(`${process.env.apiUrl}/pages?orderby=menu_order&order=asc`);
-    commit('SET_PAGES', menuPages.data);
+    let menuPages = await axios.get(`${process.env.apiUrl}/pages?orderby=menu_order&order=asc`)
+    commit('SET_PAGES', menuPages.data)
 
-    let sidePosts = await axios.get(`${process.env.apiUrl}/posts?categories=4&per_page=3&_embed`);
-    commit('SET_POSTS', sidePosts.data);
+    let sidePosts = await axios.get(`${process.env.apiUrl}/posts?categories=4&per_page=3&_embed`)
+    commit('SET_POSTS', sidePosts.data)
   }
 }

@@ -1,14 +1,16 @@
 <template>
   <section id="post">
     <div class="container">
-      <h1>{{ post.title }}</h1>
-      <span v-if="post.image" class="image object">
-        <img :src="post.image.url" :alt="post.image.alt" />
-      </span>
-      <div class="content" v-html="post.content"></div>
-      <div class="controls">
-        <nuxt-link v-bind:to="'/blog'" class="button">Back</nuxt-link>
-      </div>
+      <article>
+        <h1>{{ post.title }}</h1>
+        <span v-if="post.image" class="image object">
+          <img :src="post.image.url" :alt="post.image.alt" />
+        </span>
+        <div class="post-content" v-html="post.content"></div>
+        <div class="controls">
+          <nuxt-link v-bind:to="'/blog'" class="button">Back</nuxt-link>
+        </div>
+      </article>
     </div>
   </section>
 </template>
@@ -17,7 +19,10 @@
 export default {
   head() {
     return {
-      title: `${this.post.title}`
+      title: this.post.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.post.excerpt},
+      ]
     }
   },
   async asyncData({ params, $axios }) {
@@ -25,6 +30,7 @@ export default {
     return {
       post: {
         title: posts[0].title.rendered,
+        excerpt: posts[0].excerpt.rendered,
         content: posts[0].content.rendered,
         image: {
           url: (posts[0]._embedded['wp:featuredmedia']) ? posts[0]._embedded['wp:featuredmedia'][0].source_url : null,
