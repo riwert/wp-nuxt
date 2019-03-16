@@ -5,7 +5,7 @@
     </header>
     <div class="posts">
       <article v-for="post in posts" :key="post.id">
-        <a :href="post.link" class="image"><img :src="post.image.url" :alt="post.image.alt" /></a>
+        <a :href="post.link.url" class="image"><img :src="post.image.url" :alt="post.image.alt" /></a>
         <h3>{{ post.title }}</h3>
         <div class="post-body" v-html="post.body"></div>
         <ul class="actions">
