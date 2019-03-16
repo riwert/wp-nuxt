@@ -1,7 +1,7 @@
 {
-  "name": "nuxt-wp",
+  "name": "wp-nuxt",
   "version": "1.0.0",
-  "description": "Nuxt.js with WordPress REST API",
+  "description": "Nuxt.js with WordPress REST API and Editorial theme",
   "author": "Revert",
   "private": true,
   "scripts": {
