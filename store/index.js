@@ -38,7 +38,12 @@ export const actions = {
     commit('SET_CONFIG', siteConfig.data)
 
     let menuPages = await axios.get(`${process.env.apiUrl}/pages?_embed&orderby=menu_order&order=asc`)
-    commit('SET_PAGES', menuPages.data)
+    commit('SET_PAGES', menuPages.data.map((page) => {
+      if (page.slug == 'strona-glowna') {
+        page.slug = '';
+      }
+      return page;
+    }))
 
     let sidePosts = await axios.get(`${process.env.apiUrl}/posts?_embed&categories=4&per_page=3`)
     commit('SET_POSTS', sidePosts.data)
