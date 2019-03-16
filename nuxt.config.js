@@ -6,7 +6,7 @@ module.exports = {
   mode: 'universal',
 
   env: {
-    apiUrl: process.env.NUXT_ENV_API_URL || 'http://localhost/wp-rest-api/wp-json/wp/v2'
+    apiUrl: process.env.NUXT_ENV_API_URL || './api'
   },
 
   /*
@@ -91,8 +91,8 @@ module.exports = {
 
   generate: {
     routes: async function () {
-      let pages = await axios.get(`http://localhost/wp-rest-api/wp-json/wp/v2/pages?_embed`);
-      let posts = await axios.get(`http://localhost/wp-rest-api/wp-json/wp/v2/posts?_embed`);
+      let pages = await axios.get(`${process.env.NUXT_ENV_API_URL}/pages?_embed`);
+      let posts = await axios.get(`${process.env.NUXT_ENV_API_URL}/posts?_embed`);
       let pagesRoute = pages.data.map((page) => {
         return {
           route: `/${page.slug}`,
@@ -114,14 +114,14 @@ module.exports = {
     linkActiveClass: 'active',
     linkExactActiveClass: 'exact-active'
   },
-
+/*
   proxy: {
     '/api': {
-      target: 'http://localhost/wp-rest-api/wp-json/wp/v2',
+      target: '${process.env.NUXT_ENV_API_URL}',
       pathRewrite: {
         '^/api' : '/',
         }
       }
   }
-
+*/
 }
