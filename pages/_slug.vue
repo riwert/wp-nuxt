@@ -1,21 +1,24 @@
 <template>
-  <div>
-    <section id="subsite" :class="'page-' + slug">
-      <div class="content">
-        <header>
-          <h1>{{ title }}</h1>
-        </header>
-        <div class="subsite-content" v-html="content"></div>
-      </div>
-      <span v-if="image" class="image object">
-        <img :src="image.url" :alt="image.alt" />
-      </span>
-    </section>
-  </div>
+  <section id="subsite" :class="'page-' + slug">
+    <div class="content">
+      <header>
+        <h1>{{ title }}</h1>
+      </header>
+      <div class="subsite-content" v-html="content"></div>
+    </div>
+    <span v-if="image" class="image object">
+      <img :src="image.url" :alt="image.alt" />
+    </span>
+  </section>
 </template>
 
 <script>
+import Post from '~/components/Post.vue';
+
 export default {
+  components: {
+    Post
+  },
   head() {
     return {
       title: this.title,

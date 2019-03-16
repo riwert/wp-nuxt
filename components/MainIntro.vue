@@ -25,12 +25,12 @@ export default {
     page() {
       return {
         slug: this.rawPage.slug,
-        title: this.rawPage.title.rendered,
         content: this.rawPage.content.rendered,
         image: {
           url: (this.rawPage._embedded['wp:featuredmedia']) ? this.rawPage._embedded['wp:featuredmedia'][0].source_url : null,
           alt: (this.rawPage._embedded['wp:featuredmedia']) ? this.rawPage._embedded['wp:featuredmedia'][0].title.rendered : null,
         },
+        title: this.rawPage.acf.title,
         subtitle: this.rawPage.acf.subtitle,
         btn_more: this.rawPage.acf.btn_more,
       }

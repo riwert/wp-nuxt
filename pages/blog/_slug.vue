@@ -1,16 +1,16 @@
 <template>
-  <section id="post">
-    <div class="container">
-      <article>
-        <h1>{{ post.title }}</h1>
+  <section id="post" :class="'post-' + slug">
+    <div class="content">
+        <header>
+          <h1>{{ post.title }}</h1>
+        </header>
         <span v-if="post.image" class="image object">
           <img :src="post.image.url" :alt="post.image.alt" />
         </span>
         <div class="post-content" v-html="post.content"></div>
         <div class="controls">
-          <nuxt-link v-bind:to="'/blog'" class="button">Back</nuxt-link>
+          <nuxt-link v-bind:to="back_link.url" class="button">{{ back_link.text }}</nuxt-link>
         </div>
-      </article>
     </div>
   </section>
 </template>
@@ -25,11 +25,12 @@ export default {
       ]
     }
   },
-  async asyncData({ params, $axios, error }) {
+  async asyncData({ params, $axios, store, error }) {
     const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&slug=${params.slug}`);
     if ( ! posts[0]) {
       return error({ statusCode: 404, message: 'Post not found' });
     }
+    const blog = store.state.config.blog.acf;
     return {
       post: {
         title: posts[0].title.rendered,
@@ -39,6 +40,10 @@ export default {
           url: (posts[0]._embedded['wp:featuredmedia']) ? posts[0]._embedded['wp:featuredmedia'][0].source_url : null,
           alt: (posts[0]._embedded['wp:featuredmedia']) ? posts[0]._embedded['wp:featuredmedia'][0].title.rendered : null,
         },
+      },
+      back_link: {
+        url: blog.back_link.url,
+        text: blog.back_link.title,
       }
     }
   }

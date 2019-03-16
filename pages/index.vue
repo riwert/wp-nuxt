@@ -27,9 +27,9 @@ export default {
     }
   },
   async asyncData({ params, $axios, payload, store, error }) {
-    let slug = 'strona-glowna';
-    let categoryId = 3;
-    let categoryLimit = 6;
+    const slug = '';
+    const categoryId = 3;
+    const categoryLimit = 6;
     if (payload) {
       return {
         page: payload,
@@ -47,7 +47,7 @@ export default {
       store.dispatch('setCurrentPage', page);
       const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&categories=${categoryId}&per_page=${categoryLimit}`);
       return {
-        title: page.title.rendered,
+        title: page.acf.title,
         page: page,
         posts: posts
       }

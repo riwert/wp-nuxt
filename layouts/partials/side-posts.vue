@@ -11,7 +11,7 @@
       </article>
     </div>
     <ul class="actions">
-      <li><a href="/blog/" class="button">{{ sidePosts.more_link.title }}</a></li>
+      <li><nuxt-link :to="blog.back_link.url" class="button">{{ blog.more_link_text }}</nuxt-link></li>
     </ul>
   </section>
 </template>
@@ -21,6 +21,9 @@ export default {
   computed: {
     sidePosts() {
       return this.$store.state.config.side_posts.acf;
+    },
+    blog() {
+      return this.$store.state.config.blog.acf;
     },
     posts() {
       return this.$store.state.posts;
