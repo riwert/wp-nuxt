@@ -233,7 +233,7 @@
 					.trigger('resize.sidebar-lock');
 
 				});
-
+/*
 	// Menu.
 		var $menu = $('#menu'),
 			$menu_openers = $menu.children('ul').find('.opener');
@@ -258,5 +258,5 @@
 				});
 
 			});
-
+*/
 })(jQuery);
