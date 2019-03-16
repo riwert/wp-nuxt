@@ -25,8 +25,11 @@ export default {
       ]
     }
   },
-  async asyncData({ params, $axios }) {
-    const posts = await $axios.$get(`${process.env.apiUrl}/posts?slug=${params.slug}&_embed`);
+  async asyncData({ params, $axios, error }) {
+    const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&slug=${params.slug}`);
+    if ( ! posts[0]) {
+      return error({ statusCode: 404, message: 'Post not found' });
+    }
     return {
       post: {
         title: posts[0].title.rendered,

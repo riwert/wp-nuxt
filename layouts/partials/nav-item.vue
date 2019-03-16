@@ -1,6 +1,6 @@
 <template>
   <li>
-    <nuxt-link :class="[hasChildren ? 'opener' : '', isChildActive ? 'active' : '']" :to="`/${page.slug}`">
+    <nuxt-link :class="[hasChildren ? 'opener' : '', (isActive || isChildActive) ? 'active' : '']" :to="`/${page.slug}`">
       {{ page.title.rendered }}
     </nuxt-link>
     <ul v-if="hasChildren">
@@ -24,6 +24,9 @@ export default {
     },
     hasChildren() {
       return this.page.children && this.page.children.length;
+    },
+    isActive() {
+      return this.currentPage && this.currentPage.id == this.page.id;
     },
     isChildActive() {
       return this.currentPage && this.currentPage.parent == this.page.id;

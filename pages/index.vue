@@ -26,7 +26,7 @@ export default {
       title: this.title
     }
   },
-  async asyncData({ params, $axios, payload, store }) {
+  async asyncData({ params, $axios, payload, store, error }) {
     let slug = 'strona-glowna';
     let categoryId = 3;
     let categoryLimit = 6;
@@ -38,12 +38,17 @@ export default {
         content: payload.content.rendered
       }
     } else {
-      const pages = await $axios.$get(`${process.env.apiUrl}/pages?slug=${slug}&_embed`);
-      store.commit('SET_CURRENT_PAGE', pages[0]);
+      // const pages = await $axios.$get(`${process.env.apiUrl}/pages?slug=${slug}&_embed`);
+      // const pages = store.state.pages.filter((page) => page.slug == slug);
+      const page = store.getters.getPageBySlug(slug);
+      if ( ! page) {
+        return error({ statusCode: 404, message: 'Page not found' });
+      }
+      store.dispatch('setCurrentPage', page);
       const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&categories=${categoryId}&per_page=${categoryLimit}`);
       return {
-        title: pages[0].title.rendered,
-        page: pages[0],
+        title: page.title.rendered,
+        page: page,
         posts: posts
       }
     }

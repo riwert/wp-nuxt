@@ -6,7 +6,7 @@ module.exports = {
   mode: 'universal',
 
   env: {
-    apiUrl: process.env.API_URL || 'http://localhost/wp-rest-api/wp-json/wp/v2'
+    apiUrl: process.env.NUXT_ENV_API_URL || 'http://localhost/wp-rest-api/wp-json/wp/v2'
   },
 
   /*
@@ -38,6 +38,11 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#f56a6a' },
+
+  /*
+  ** Customize the default transition
+  */
+  transition: 'custom-bounce',
 
   /*
   ** Global CSS
@@ -85,16 +90,23 @@ module.exports = {
   },
 
   generate: {
-    routes: function () {
-      return axios.get(`http://localhost/wp-rest-api/wp-json/wp/v2/pages?&orderby=menu_order&order=asc`)
-      .then((res) => {
-        return res.data.map((page) => {
-          return {
-            route: `/${page.slug}`,
-            payload: page
-          }
-        })
-      })
+    routes: async function () {
+      let pages = await axios.get(`http://localhost/wp-rest-api/wp-json/wp/v2/pages?_embed`);
+      let posts = await axios.get(`http://localhost/wp-rest-api/wp-json/wp/v2/posts?_embed`);
+      let pagesRoute = pages.data.map((page) => {
+        return {
+          route: `/${page.slug}`,
+          payload: page
+        }
+      });
+      let postsRoute = posts.data.map((post) => {
+        return {
+          route: `/blog/${post.slug}`,
+          payload: post
+        }
+      });
+      let allRoutes = pagesRoute.concat(postsRoute);
+      return allRoutes;
     }
   },
 

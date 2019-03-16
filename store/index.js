@@ -37,10 +37,20 @@ export const actions = {
     let siteConfig = await axios.get(`${process.env.apiUrl}/config`)
     commit('SET_CONFIG', siteConfig.data)
 
-    let menuPages = await axios.get(`${process.env.apiUrl}/pages?orderby=menu_order&order=asc`)
+    let menuPages = await axios.get(`${process.env.apiUrl}/pages?_embed&orderby=menu_order&order=asc`)
     commit('SET_PAGES', menuPages.data)
 
-    let sidePosts = await axios.get(`${process.env.apiUrl}/posts?categories=4&per_page=3&_embed`)
+    let sidePosts = await axios.get(`${process.env.apiUrl}/posts?_embed&categories=4&per_page=3`)
     commit('SET_POSTS', sidePosts.data)
+  },
+  setCurrentPage({ commit }, currentPage) {
+    commit('SET_CURRENT_PAGE', currentPage);
+  }
+}
+
+export const getters = {
+  getPageBySlug: (state) => (slug) => {
+    let pages = state.pages.filter((page) => page.slug === slug);
+    return (pages[0]) ? pages[0] : null;
   }
 }

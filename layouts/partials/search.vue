@@ -36,7 +36,7 @@ export default {
             return {
               title: post.title.rendered,
               excerpt: post.excerpt.rendered,
-              link: ((post.type == 'page') ? post.slug : `/blog/${post.slug}`),
+              link: ((post.type == 'page') ? `/${post.slug}` : `/blog/${post.slug}`),
               image: {
                 url: (post._embedded['wp:featuredmedia']) ? post._embedded['wp:featuredmedia'][0].source_url : null,
                 alt: (post._embedded['wp:featuredmedia']) ? post._embedded['wp:featuredmedia'][0].title.rendered : null,
