@@ -15,6 +15,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -24,8 +25,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getConfig']),
     searcher() {
-      return this.$store.state.config.searcher.acf;
+      return this.getConfig('searcher');
     },
   },
   methods: {

@@ -20,7 +20,7 @@ export default {
     Main,
     Sidebar
   },
-  mounted: function() {
+  mounted() {
     require('../static/js/util.js')
     require('../static/js/main.js')
   }

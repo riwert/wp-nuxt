@@ -6,10 +6,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
+    ...mapGetters(['getConfig']),
     footer() {
-      return this.$store.state.config.footer.acf;
+      return this.getConfig('footer');
     }
   }
 }

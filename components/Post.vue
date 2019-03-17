@@ -12,13 +12,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
     rawPost: Object
   },
   computed: {
+    ...mapGetters(['getConfig']),
     blog() {
-      return this.$store.state.config.blog.acf;
+      return this.getConfig('blog');
     },
     post() {
       return {

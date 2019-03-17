@@ -32,10 +32,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
+    ...mapGetters(['getConfig']),
     panel() {
-      return this.$store.state.config.panel.acf
+      return this.getConfig('panel')
     }
   }
 }

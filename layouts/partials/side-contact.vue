@@ -13,10 +13,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
+    ...mapGetters(['getConfig', 'getAllPages']),
     contact() {
-      return this.$store.state.config.contact.acf;
+      return this.getConfig('contact');
     }
   }
 }

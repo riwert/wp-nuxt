@@ -4,7 +4,7 @@
       <h2>{{ sidePosts.header }}</h2>
     </header>
     <div class="mini-posts">
-      <article v-for="post in computedPosts" :key="post.id">
+      <article v-for="post in posts" :key="post.id">
         <a v-if="post.image" :href="post.link" :title="post.title" class="image"><img :src="post.image.url" :alt="post.image.alt" /></a>
         <!-- <h3>{{ post.title }}</h3> -->
         <div class="excerpt" v-html="post.excerpt"></div>
@@ -17,19 +17,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
+    ...mapGetters(['getConfig', 'getSidePosts']),
     sidePosts() {
-      return this.$store.state.config.side_posts.acf;
+      return this.getConfig('side_posts');
     },
     blog() {
-      return this.$store.state.config.blog.acf;
+      return this.getConfig('blog');
     },
     posts() {
-      return this.$store.state.posts;
-    },
-    computedPosts() {
-      return this.posts.map((post) => {
+      return this.getSidePosts.map((post) => {
         return {
           id: post.id,
           title: post.title.rendered,

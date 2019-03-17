@@ -14,13 +14,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
     page: Object
   },
   computed: {
+    ...mapGetters(['getCurrentPage']),
     currentPage() {
-      return this.$store.state.currentPage;
+      return this.getCurrentPage;
     },
     hasChildren() {
       return this.page.children && this.page.children.length;

@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import NavItem from './nav-item';
 
 export default {
@@ -17,11 +18,12 @@ export default {
     NavItem
   },
   computed: {
+    ...mapGetters(['getConfig', 'getAllPages']),
     menu() {
-      return this.$store.state.config.menu.acf;
+      return this.getConfig('menu');
     },
     pages() {
-      return this.$store.state.pages;
+      return this.getAllPages;
     },
     treePages() {
       return this.buildTreePages();
