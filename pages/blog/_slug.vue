@@ -1,5 +1,5 @@
 <template>
-  <section id="post" :class="'post-' + slug">
+  <section id="post" :class="'post-' + post.slug">
     <div class="content">
         <header>
           <h1>{{ post.title }}</h1>
@@ -33,6 +33,7 @@ export default {
     const blog = store.state.config.blog.acf;
     return {
       post: {
+        slug: posts[0].slug,
         title: posts[0].title.rendered,
         excerpt: posts[0].excerpt.rendered,
         content: posts[0].content.rendered,

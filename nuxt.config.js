@@ -42,7 +42,7 @@ module.exports = {
   /*
   ** Customize the default transition
   */
-  transition: 'custom-bounce',
+  // transition: 'page',
 
   /*
   ** Global CSS
