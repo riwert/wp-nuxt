@@ -14,6 +14,7 @@
 import MainIntro from '~/components/MainIntro';
 import MainFeatures from '~/components/MainFeatures';
 import MainPosts from '~/components/MainPosts';
+import replacer from '~/services/replacer';
 
 export default {
   components: {
@@ -44,6 +45,8 @@ export default {
       if ( ! page) {
         return error({ statusCode: 404, message: 'Page not found' });
       }
+      // replace wp links
+      page.content.rendered = replacer(page.content.rendered);
       store.dispatch('setCurrentPage', page);
       const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&categories=${categoryId}&per_page=${categoryLimit}`);
       return {

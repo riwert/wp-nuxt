@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import replacer from '~/services/replacer';
+
 export default {
   head() {
     return {
@@ -30,6 +32,8 @@ export default {
     if ( ! posts[0]) {
       return error({ statusCode: 404, message: 'Post not found' });
     }
+    // replace wp links
+    posts[0].content.rendered = replacer(posts[0].content.rendered);
     const blog = store.state.config.blog.acf;
     return {
       post: {

@@ -6,7 +6,8 @@ module.exports = {
   mode: 'universal',
 
   env: {
-    apiUrl: process.env.NUXT_ENV_API_URL || './api'
+    apiUrl: process.env.NUXT_ENV_API_URL || './api',
+    wpUrl: process.env.NUXT_ENV_WP_URL
   },
 
   /*

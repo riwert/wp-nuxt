@@ -17,6 +17,7 @@
 
 <script>
 import Post from '~/components/Post.vue';
+import replacer from '~/services/replacer';
 
 export default {
   components: {
@@ -37,6 +38,8 @@ export default {
     if ( ! page) {
       return error({ statusCode: 404, message: 'Page not found' });
     }
+    // replace wp links
+    page.content.rendered = replacer(page.content.rendered);
     store.dispatch('setCurrentPage', page);
     return {
       posts: posts,
