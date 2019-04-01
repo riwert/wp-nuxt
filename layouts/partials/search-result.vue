@@ -5,9 +5,11 @@
     </div>
     <div v-if="getSearchResult" class="posts results">
       <article v-for="post in getSearchResult" :key="post.id">
-        <nuxt-link v-if="post.image" :to="post.link" :title="post.title" class="image"><img :src="post.image.url" :alt="post.image.alt" /></nuxt-link>
-        <h3><nuxt-link :to="post.link" :title="post.title">{{ post.title }}</nuxt-link></h3>
-        <div class="excerpt" v-html="post.excerpt"></div>
+        <nuxt-link v-if="post.image" :to="post.link" :title="post.title" class="image object">
+          <img :src="post.image.url" :alt="post.image.alt" />
+        </nuxt-link>
+        <h2><nuxt-link :to="post.link" :title="post.title">{{ post.title }}</nuxt-link></h2>
+        <div class="post-excerpt" v-html="post.excerpt"></div>
       </article>
     </div>
   </div>
@@ -31,7 +33,7 @@ img {
   position: relative;
 }
 .results {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .loader {
   position: absolute;
