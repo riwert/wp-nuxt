@@ -1,7 +1,7 @@
 <template>
   <section id="search" class="alt">
-    <form method="post" action="#" @submit.prevent="search">
-      <input type="text" name="query" id="query" :placeholder="searcher.placeholder" v-model="searchPhrase" @change="search" />
+    <form method="post" action="" @submit.prevent="search" @click="search">
+      <input type="text" name="query" id="query" :placeholder="searcher.placeholder" v-model="searchPhrase" @change="search" @click.stop="" />
       <div v-if="getSearchLoading" class="loader">
         <div class="lds-ripple"><div></div><div></div></div>
       </div>
@@ -53,18 +53,22 @@ export default {
 }
 </script>
 
-<style scoped>
-img {
-  max-width: 100%;
-}
-form {
-  position: relative;
+<style lang="scss" scoped>
+#search {
+  form {
+    position: relative;
+
+    &::before {
+      cursor: pointer;
+    }
+  }
 }
 .loader {
   position: absolute;
-  top: 0.5rem;
+  top: 50%;
   left: 0;
   right: 0;
+  margin-top: -14px;
   text-align: center;
 }
 .lds-ripple {

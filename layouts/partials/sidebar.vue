@@ -2,7 +2,7 @@
   <div id="sidebar">
     <div class="inner">
 
-      <Search />
+      <Searcher />
 
       <Nav />
 
@@ -18,7 +18,7 @@
 
 <script>
 import Nav from './nav';
-import Search from './search';
+import Searcher from './searcher';
 import Footer from './footer';
 import SidePosts from './side-posts';
 import SideContact from './side-contact';
@@ -26,7 +26,7 @@ import SideContact from './side-contact';
 export default {
   components: {
     Nav,
-    Search,
+    Searcher,
     Footer,
     SidePosts,
     SideContact
