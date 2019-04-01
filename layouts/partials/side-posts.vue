@@ -5,7 +5,7 @@
     </header>
     <div class="mini-posts">
       <article v-for="post in posts" :key="post.id">
-        <a v-if="post.image" :href="post.link" :title="post.title" class="image"><img :src="post.image.url" :alt="post.image.alt" /></a>
+        <nuxt-link v-if="post.image" :to="post.link" :title="post.title" class="image"><img :src="post.image.url" :alt="post.image.alt" /></nuxt-link>
         <!-- <h3>{{ post.title }}</h3> -->
         <div class="excerpt" v-html="post.excerpt"></div>
       </article>

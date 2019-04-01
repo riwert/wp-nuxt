@@ -3,7 +3,7 @@
     <div class="inner">
 
       <Header />
-
+      <SearchResult />
       <Nuxt />
 
     </div>
@@ -12,10 +12,12 @@
 
 <script>
 import Header from './header';
+import SearchResult from './search-result';
 
 export default {
   components: {
-    Header
+    Header,
+    SearchResult
   }
 }
 </script>

@@ -7,7 +7,7 @@
       </header>
       <div class="main-content" v-html="page.content"></div>
       <ul class="actions">
-        <li><a :href="page.btn_more.url" class="button big">{{ page.btn_more.title }}</a></li>
+        <li><nuxt-link :to="page.btn_more.url" class="button big">{{ page.btn_more.title }}</nuxt-link></li>
       </ul>
     </div>
     <span v-if="page.image" class="image object">

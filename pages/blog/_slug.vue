@@ -34,6 +34,7 @@ export default {
     }
     // replace wp links
     posts[0].content.rendered = replacer(posts[0].content.rendered);
+    store.dispatch('setCurrentPage', posts[0]);
     const blog = store.state.config.blog.acf;
     return {
       post: {

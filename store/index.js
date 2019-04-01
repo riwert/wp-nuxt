@@ -5,6 +5,8 @@ export const state = () => ({
   pages: null,
   sidePosts: null,
   currentPage: null,
+  searchResult: null,
+  searchLoading: false,
 })
 
 export const mutations = {
@@ -19,6 +21,12 @@ export const mutations = {
   },
   SET_CURRENT_PAGE(state, currentPage) {
 		state.currentPage = currentPage
+  },
+  SET_SEARCH_RESULT(state, searchResult) {
+		state.searchResult = searchResult
+  },
+  SET_SEARCH_LOADING(state, searchLoading) {
+		state.searchLoading = searchLoading
   },
 }
 
@@ -55,6 +63,13 @@ export const actions = {
   },
   setCurrentPage({ commit }, currentPage) {
     commit('SET_CURRENT_PAGE', currentPage)
+    commit('SET_SEARCH_RESULT', '')
+  },
+  setSearchResult({ commit }, searchResult) {
+    commit('SET_SEARCH_RESULT', searchResult)
+  },
+  setSearchLoading({ commit }, searchLoading) {
+    commit('SET_SEARCH_LOADING', searchLoading)
   }
 }
 
@@ -74,5 +89,11 @@ export const getters = {
   },
   getConfig: state => name => {
     return (state.config[name]) ? state.config[name].acf : null
+  },
+  getSearchResult: state => {
+    return state.searchResult && state.searchResult.length ? state.searchResult : null
+  },
+  getSearchLoading: state => {
+    return state.searchLoading
   },
 }
