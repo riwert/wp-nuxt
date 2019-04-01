@@ -46,7 +46,7 @@
 		background-color: _palette(bg-alt);
 		font-size: 0.9em;
 		position: relative;
-		width: _size(sidebar-width);
+    width: _size(sidebar-width);
 
 		h2 {
 			font-size: (1.25em / 0.9);
@@ -54,8 +54,10 @@
 
 		> .inner {
 			@include padding($pad, $pad, (0, 0, $pad, 0));
-			position: relative;
-			width: _size(sidebar-width);
+      position: relative;
+      width: _size(sidebar-width);
+      overflow-x: hidden;
+      overflow-y: auto;
 
 			> * {
 				border-bottom: solid 2px _palette(border);
@@ -166,8 +168,6 @@
 				-webkit-overflow-scrolling: touch;
 				height: 100%;
 				left: 0;
-				overflow-x: hidden;
-				overflow-y: auto;
 				position: absolute;
 				top: 0;
 
