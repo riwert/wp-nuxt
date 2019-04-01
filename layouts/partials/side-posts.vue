@@ -11,7 +11,7 @@
       </article>
     </div>
     <ul class="actions">
-      <li><nuxt-link :to="blog.back_link.url" class="button">{{ blog.more_link_text }}</nuxt-link></li>
+      <li><nuxt-link :to="sidePosts.more_link.url" class="button">{{ sidePosts.more_link.title }}</nuxt-link></li>
     </ul>
   </section>
 </template>
@@ -38,7 +38,7 @@ export default {
             url: (post._embedded['wp:featuredmedia']) ? post._embedded['wp:featuredmedia'][0].source_url : null,
             alt: (post._embedded['wp:featuredmedia']) ? post._embedded['wp:featuredmedia'][0].title.rendered : null,
           },
-          link: `/blog/${post.slug}`,
+          link: `/blog/${post.slug}`
         }
       });
     }
