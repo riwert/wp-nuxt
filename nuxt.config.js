@@ -29,9 +29,11 @@ module.exports = {
       { src: '/js/jquery.min.js' },
       { src: '/js/browser.min.js' },
       { src: '/js/breakpoints.min.js' },
+      // { src: '/js/util.js' },
+      // { src: '/js/main.js' },
     ],
     bodyAttrs: {
-      class: 'is-preload'
+      class: ''
     },
   },
 

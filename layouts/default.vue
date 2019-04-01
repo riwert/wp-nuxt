@@ -21,8 +21,8 @@ export default {
     Sidebar
   },
   mounted() {
-    require('../static/js/util.js')
-    require('../static/js/main.js')
+    require('../static/js/util')
+    require('../static/js/main')
   }
 }
 </script>
