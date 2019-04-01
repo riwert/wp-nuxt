@@ -1,6 +1,6 @@
-# nuxt-test
+# wp-nuxt
 
-> My grand Nuxt.js project
+> WordPress API and Nuxt.js
 
 ## Build Setup
 
