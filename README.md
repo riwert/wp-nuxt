@@ -2,6 +2,9 @@
 
 > WordPress API and Nuxt.js with Editorial theme
 
+## Demo
+[wp-nuxt.revert.pl](http://wp-nuxt.revert.pl)
+
 ## Build Setup
 
 ``` bash
