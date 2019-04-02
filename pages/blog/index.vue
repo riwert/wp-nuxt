@@ -17,7 +17,6 @@
 
 <script>
 import Post from '~/components/Post.vue';
-import replacer from '~/services/replacer';
 
 export default {
   components: {
@@ -31,15 +30,13 @@ export default {
       ]
     }
   },
-  async asyncData({ $axios, store, error }) {
+  async asyncData({ store, error }) {
     const slug = 'blog';
-    const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed`);
+    const posts = store.getters.getAllPosts;
     const page = store.getters.getPageBySlug(slug);
     if ( ! page) {
       return error({ statusCode: 404, message: 'Page not found' });
     }
-    // replace wp links
-    page.content.rendered = replacer(page.content.rendered);
     store.dispatch('setCurrentPage', page);
     return {
       posts: posts,

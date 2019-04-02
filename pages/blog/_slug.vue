@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import replacer from '~/services/replacer';
-
 export default {
   head() {
     return {
@@ -27,24 +25,22 @@ export default {
       ]
     }
   },
-  async asyncData({ params, $axios, store, error }) {
-    const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&slug=${params.slug}`);
-    if ( ! posts[0]) {
+  async asyncData({ params, store, error }) {
+    const post = store.getters.getPostBySlug(params.slug);
+    if ( ! post) {
       return error({ statusCode: 404, message: 'Post not found' });
     }
-    // replace wp links
-    posts[0].content.rendered = replacer(posts[0].content.rendered);
-    store.dispatch('setCurrentPage', posts[0]);
+    store.dispatch('setCurrentPage', post);
     const blog = store.state.config.blog.acf;
     return {
       post: {
-        slug: posts[0].slug,
-        title: posts[0].title.rendered,
-        excerpt: posts[0].excerpt.rendered,
-        content: posts[0].content.rendered,
+        slug: post.slug,
+        title: post.title.rendered,
+        excerpt: post.excerpt.rendered,
+        content: post.content.rendered,
         image: {
-          url: (posts[0]._embedded['wp:featuredmedia']) ? posts[0]._embedded['wp:featuredmedia'][0].source_url : null,
-          alt: (posts[0]._embedded['wp:featuredmedia']) ? posts[0]._embedded['wp:featuredmedia'][0].title.rendered : null,
+          url: (post._embedded['wp:featuredmedia']) ? post._embedded['wp:featuredmedia'][0].source_url : null,
+          alt: (post._embedded['wp:featuredmedia']) ? post._embedded['wp:featuredmedia'][0].title.rendered : null,
         },
       },
       back_link: {

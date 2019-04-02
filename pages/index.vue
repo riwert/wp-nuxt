@@ -14,7 +14,6 @@
 import MainIntro from '~/components/MainIntro';
 import MainFeatures from '~/components/MainFeatures';
 import MainPosts from '~/components/MainPosts';
-import replacer from '~/services/replacer';
 
 export default {
   components: {
@@ -27,7 +26,7 @@ export default {
       title: this.title
     }
   },
-  async asyncData({ params, $axios, payload, store, error }) {
+  async asyncData({ params, payload, store, error }) {
     const slug = '';
     const categoryId = 3;
     const categoryLimit = 6;
@@ -39,16 +38,15 @@ export default {
         content: payload.content.rendered
       }
     } else {
-      // const pages = await $axios.$get(`${process.env.apiUrl}/pages?slug=${slug}&_embed`);
-      // const pages = store.state.pages.filter((page) => page.slug == slug);
       const page = store.getters.getPageBySlug(slug);
       if ( ! page) {
         return error({ statusCode: 404, message: 'Page not found' });
       }
-      // replace wp links
-      page.content.rendered = replacer(page.content.rendered);
       store.dispatch('setCurrentPage', page);
-      const posts = await $axios.$get(`${process.env.apiUrl}/posts?_embed&categories=${categoryId}&per_page=${categoryLimit}`);
+      let limit = 0;
+      const posts = store.getters.getAllPosts.filter(post => {
+        return post.categories.includes(categoryId) && limit++ < categoryLimit;
+      });
       return {
         title: page.acf.title,
         page: page,

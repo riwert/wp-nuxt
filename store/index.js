@@ -1,8 +1,11 @@
+import replacer from '~/services/replacer'
+
 export const strict = false
 
 export const state = () => ({
   config: null,
   pages: null,
+  posts: null,
   sidePosts: null,
   currentPage: null,
   searchResult: null,
@@ -15,6 +18,9 @@ export const mutations = {
   },
 	SET_PAGES(state, pages) {
 		state.pages = pages
+  },
+	SET_POSTS(state, posts) {
+		state.posts = posts
   },
   SET_SIDE_POSTS(state, sidePosts) {
 		state.sidePosts = sidePosts
@@ -35,6 +41,7 @@ export const actions = {
     // console.log('nuxt server init')
     await dispatch('setConfig')
     await dispatch('setPages')
+    await dispatch('setPosts')
     await dispatch('setSidePosts')
   },
   async setConfig({ commit }) {
@@ -49,17 +56,32 @@ export const actions = {
     const mainSlug = 'strona-glowna'
     const menuPages = await this.$axios.$get(`${process.env.apiUrl}/pages?_embed&orderby=menu_order&order=asc`)
     commit('SET_PAGES', menuPages.map((page) => {
+      // remove slug for main page
       if (page.slug == mainSlug) {
         page.slug = ''
       }
+      // replace wp links
+      page.content.rendered = replacer(page.content.rendered);
       return page;
+    }))
+  },
+  async setPosts({ commit }) {
+    const posts = await this.$axios.$get(`${process.env.apiUrl}/posts?_embed`)
+    commit('SET_POSTS', posts.map((post) => {
+      // replace wp links
+      post.content.rendered = replacer(post.content.rendered);
+      return post;
     }))
   },
   async setSidePosts({ commit }) {
     const categoryId = 4
     const postsLimit = 3
     const sidePosts = await this.$axios.$get(`${process.env.apiUrl}/posts?_embed&categories=${categoryId}&per_page=${postsLimit}`)
-    commit('SET_SIDE_POSTS', sidePosts)
+    commit('SET_SIDE_POSTS', sidePosts.map((post) => {
+      // replace wp links
+      post.content.rendered = replacer(post.content.rendered);
+      return post;
+    }))
   },
   setCurrentPage({ commit }, currentPage) {
     commit('SET_CURRENT_PAGE', currentPage)
@@ -80,6 +102,13 @@ export const getters = {
   getPageBySlug: state => slug => {
     const pages = state.pages.filter((page) => page.slug === slug)
     return (pages[0]) ? pages[0] : null
+  },
+  getAllPosts: state => {
+    return state.posts
+  },
+  getPostBySlug: state => slug => {
+    const posts = state.posts.filter((post) => post.slug === slug)
+    return (posts[0]) ? posts[0] : null
   },
   getCurrentPage: state => {
     return state.currentPage

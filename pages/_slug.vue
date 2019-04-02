@@ -14,7 +14,6 @@
 
 <script>
 import Post from '~/components/Post.vue';
-import replacer from '~/services/replacer';
 
 export default {
   components: {
@@ -28,7 +27,7 @@ export default {
       ]
     }
   },
-  async asyncData({ params, $axios, payload, store, error }) {
+  async asyncData({ params, payload, store, error }) {
     if (payload) {
       return {
         slug: payload.slug,
@@ -36,14 +35,10 @@ export default {
         content: payload.content.rendered
       }
     } else {
-      // const pages = await $axios.$get(`${process.env.apiUrl}/pages?_embed&slug=${params.slug}`);
-      // const pages = store.state.pages.filter((page) => page.slug == params.slug);
       const page = store.getters.getPageBySlug(params.slug);
       if ( ! page) {
         return error({ statusCode: 404, message: 'Page not found' });
       }
-      // replace wp links
-      page.content.rendered = replacer(page.content.rendered);
       store.dispatch('setCurrentPage', page);
       return {
         slug: page.slug,
