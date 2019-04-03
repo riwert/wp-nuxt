@@ -38,3 +38,9 @@ $ npm install
 ```
 
 Fill up api/.env file.
+
+### Required WordPress plugins
+- Custom Post Type UI
+- Advanced Custom Fields
+- ACF to REST API
+- REST API Multiple Post Types
