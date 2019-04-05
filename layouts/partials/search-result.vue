@@ -5,10 +5,10 @@
     </div>
     <div v-if="getSearchResult" class="posts results">
       <article v-for="post in getSearchResult" :key="post.id">
-        <nuxt-link v-if="post.image" :to="post.link" :title="post.title" class="image object">
+        <nuxt-link v-if="post.image" :to="post.link" :title="post.title" class="image object" @click.native="clearSearchResult">
           <img :src="post.image.url" :alt="post.image.alt" />
         </nuxt-link>
-        <h2><nuxt-link :to="post.link" :title="post.title">{{ post.title }}</nuxt-link></h2>
+        <h2><nuxt-link :to="post.link" :title="post.title" @click.native="clearSearchResult">{{ post.title }}</nuxt-link></h2>
         <div class="post-excerpt" v-html="post.excerpt"></div>
       </article>
     </div>
@@ -16,11 +16,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters(['getSearchResult', 'getSearchLoading'])
+  },
+  methods: {
+    ...mapActions(['setSearchResult']),
+    clearSearchResult() {
+      this.setSearchResult('');
+    }
   }
 }
 </script>
