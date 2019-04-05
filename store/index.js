@@ -88,11 +88,19 @@ export const actions = {
     commit('SET_SEARCH_RESULT', '')
   },
   setSearchResult({ commit }, searchResult) {
+    const mainLink = '/strona-glowna';
+    searchResult = searchResult ? searchResult.map(page => {
+      // remove slug for main page
+      if (page.link == mainLink) {
+        page.link = '/'
+      }
+      return page;
+    }) : null;
     commit('SET_SEARCH_RESULT', searchResult)
   },
   setSearchLoading({ commit }, searchLoading) {
     commit('SET_SEARCH_LOADING', searchLoading)
-  }
+  },
 }
 
 export const getters = {
